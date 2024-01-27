@@ -13,7 +13,7 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        return $this->renderProducts($query);
+        return  response( $this->renderProducts($query));
     }
 
     public function byCategory(Category $category)
@@ -57,9 +57,8 @@ class ProductController extends Controller
 
             ->paginate(5);
 
-        return view('product.index', [
-            'products' => $products
-        ]);
+        return  $products;
+
 
     }
 }

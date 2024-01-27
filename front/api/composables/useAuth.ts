@@ -3,18 +3,18 @@ import { useApi } from './useApi';
 import { useRouter } from 'vue-router';
 export const useAuth = () => {
     const router = useRouter();
-     const config = useRuntimeConfig();
+    const config = useRuntimeConfig();
     const { authentication } = useApi();
     const user = useUser();
-    const userProfile=ref([])
-console.log(user.value?.name)
-    const isAuthenticated = computed(() => user.value?.name!==undefined);
-console.log(isAuthenticated.value);
+    const userProfile = ref([])
+    console.log(user.value?.name)
+    const isAuthenticated = computed(() => user.value?.name !== undefined);
+    console.log(isAuthenticated.value);
 
     async function fetchUser(): Promise<any> {
         user.value = await authentication.user();
     }
-    async function  profileDetails(): Promise<any>{
+    async function profileDetails(): Promise<any> {
         userProfile.value = await authentication.profileDetails();
         console.log(userProfile.value);
 
@@ -50,7 +50,7 @@ console.log(isAuthenticated.value);
     async function register(
         name: string,
         email: string,
-        phone:string,
+        phone: string,
         password: string,
         password_confirmation: string
     ): Promise<any> {
@@ -78,7 +78,7 @@ console.log(isAuthenticated.value);
     }
     async function passwordForgot(email: string): Promise<{ status: string }> {
 
-       const data= await authentication.passwordForgot(
+        const data = await authentication.passwordForgot(
             email
         );
         return data;
@@ -90,8 +90,8 @@ console.log(isAuthenticated.value);
         password: string,
         password_confirmation: string
     ): Promise<any> {
-        await authentication.passwordReset(token,email,password,password_confirmation).then((res)=>{
-            console.log('res'+res);
+        await authentication.passwordReset(token, email, password, password_confirmation).then((res) => {
+            console.log('res' + res);
 
         })
 
